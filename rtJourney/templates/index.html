@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Learning Journey</title>
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+</head>
+
+<body>
+    <h1>Welcome to My Learning Journey</h1>
+    <p>Click on any topic to see more details!</p>
+
+    <h2>Learning Highlights:</h2>
+    <ul>
+        {% for journey in journeys %}
+        <li onclick="toggleDetails(this)">
+            <strong>{{ journey.title }}</strong>
+            <div class="details">{{ journey.description }} ({{ journey.date }})</div>
+        </li>
+        {% empty %}
+        <p class="empty-message">No learning journeys added yet! Log in to the admin panel to add some.</p>
+        {% endfor %}
+    </ul>
+
+    <!-- Admin Screenshots Gallery -->
+    <h2>Admin Interface Screenshots</h2>
+    <p>Below are screenshots of my Django admin panel:</p>
+    <div class="screenshot-gallery">
+        <img src="{% static 'images/admin_dashboard.png' %}" alt="Admin Dashboard">
+        <img src="{% static 'images/admin_site.png' %}" alt="Admin Site">
+        <img src="{% static 'images/journey_list.png' %}" alt="Journey List">
+        <img src="{% static 'images/adding_journey.png' %}" alt="Adding Journey">
+        <img src="{% static 'images/add_groups.png' %}" alt="Add Groups">
+        <img src="{% static 'images/add_user.png' %}" alt="Add User">
+    </div>
+
+    <p class="about-link"><a href="{% url 'about' %}">About Me →</a></p>
+
+    <script>
+        function toggleDetails(li) {
+            const details = li.querySelector('.details');
+            details.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>
